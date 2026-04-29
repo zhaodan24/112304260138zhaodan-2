@@ -159,316 +159,100 @@ async def predict_canvas(payload: CanvasPayload) -> dict[str, object]:
 
 HTML = r"""
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>手写数字识别系统</title>
+  <title>112304260138 Zhao Dan | CNN Digit Recognition Console</title>
   <style>
-    :root {
-      --ink: #1f2530;
-      --muted: #647084;
-      --paper: rgba(255, 255, 255, .94);
-      --line: #e5e7ec;
-      --primary: #e85d3f;
-      --secondary: #315f86;
-      --panel: #33384e;
-    }
+    :root { --ink:#17202a; --muted:#667085; --paper:rgba(255,255,255,.94); --line:#d9e0e8; --steel:#26384f; --teal:#0f8b8d; --coral:#e45f3c; --shadow:0 18px 55px rgba(25,39,52,.16); }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 12% 12%, rgba(255,255,255,.30), transparent 28%),
-        linear-gradient(128deg, #f6f0d8 0%, #efc37c 37%, #d9684e 67%, #363a55 100%);
-    }
-    .wrap { max-width: 1180px; margin: 0 auto; padding: 24px; }
-    .hero {
-      padding: 28px;
-      color: white;
-      background: rgba(24, 29, 48, .25);
-      border: 1px solid rgba(255, 255, 255, .20);
-      border-radius: 20px;
-      margin-bottom: 18px;
-      backdrop-filter: blur(8px);
-    }
-    h1 { margin: 0 0 8px; font-size: 34px; letter-spacing: 0; }
-    .hero p { margin: 0; color: rgba(255,255,255,.86); line-height: 1.7; }
-    .grid { display: grid; grid-template-columns: 1.55fr 1fr; gap: 18px; align-items: start; }
-    .card {
-      background: var(--paper);
-      border: 1px solid rgba(255,255,255,.72);
-      border-radius: 8px;
-      padding: 18px;
-      box-shadow: 0 20px 46px rgba(31,37,48,.13);
-    }
-    .tabs { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-    .tab {
-      border: 0;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #eef0f3;
-      color: var(--ink);
-      cursor: pointer;
-      font-weight: 700;
-    }
-    .tab.active { background: var(--panel); color: #fff; }
-    .panel { display: none; }
-    .panel.active { display: block; }
-    .actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-    button.primary, button.secondary {
-      border: 0;
-      padding: 11px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 700;
-      color: #fff;
-    }
-    button.primary { background: var(--primary); }
-    button.secondary { background: var(--secondary); }
-    input[type="file"] {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      background: #fff;
-      border: 1px dashed #bdc4cf;
-      border-radius: 8px;
-    }
-    #canvas {
-      width: 280px;
-      height: 280px;
-      background: #fff;
-      border-radius: 8px;
-      border: 2px solid #cfd5df;
-      touch-action: none;
-      display: block;
-    }
-    #preview {
-      display: none;
-      width: 220px;
-      height: 220px;
-      object-fit: contain;
-      margin-top: 12px;
-      border-radius: 8px;
-      border: 1px solid #d8dde6;
-      background: #fff;
-    }
-    .metric { font-size: 42px; font-weight: 850; margin: 2px 0 4px; }
-    .muted { color: var(--muted); }
-    .bars { display: grid; gap: 8px; margin-top: 14px; }
-    .bar-row { display: grid; grid-template-columns: 32px 1fr 64px; gap: 10px; align-items: center; }
-    .bar-track { width: 100%; height: 12px; background: #edf1f5; border-radius: 999px; overflow: hidden; }
-    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); }
-    table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: .95rem; }
-    th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; }
-    th { color: #434b5b; }
-    .history-title { margin: 20px 0 0; font-size: 18px; }
-    .error { color: #b32318; margin-top: 10px; min-height: 22px; }
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-      #canvas { width: 100%; max-width: 280px; }
-      h1 { font-size: 28px; }
-    }
+    body { margin:0; min-height:100vh; font-family:"Segoe UI","Microsoft YaHei",sans-serif; color:var(--ink); background:linear-gradient(rgba(255,255,255,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.24) 1px,transparent 1px),linear-gradient(132deg,#f4efe5 0%,#d8e9e7 30%,#f3cf8a 63%,#40516a 100%); background-size:34px 34px,34px 34px,cover; }
+    .shell { max-width:1220px; margin:0 auto; padding:24px; }
+    .topbar { display:grid; grid-template-columns:1fr auto; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-kicker { color:#2f5868; font-size:13px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    h1 { margin:6px 0 8px; font-size:36px; line-height:1.14; letter-spacing:0; }
+    .subtitle { margin:0; color:#4e5d6d; line-height:1.75; max-width:780px; }
+    .status-strip { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    .chip { padding:8px 10px; border:1px solid rgba(255,255,255,.65); border-radius:999px; background:rgba(255,255,255,.72); color:#26384f; font-size:13px; font-weight:700; box-shadow:0 8px 24px rgba(25,39,52,.08); white-space:nowrap; }
+    .workspace { display:grid; grid-template-columns:minmax(0,1.46fr) minmax(360px,.9fr); gap:18px; align-items:start; }
+    .surface { border:1px solid rgba(255,255,255,.72); background:var(--paper); border-radius:10px; box-shadow:var(--shadow); overflow:hidden; }
+    .surface-head { display:flex; justify-content:space-between; gap:12px; align-items:center; padding:16px 18px; border-bottom:1px solid var(--line); background:linear-gradient(90deg,rgba(255,255,255,.82),rgba(244,247,248,.72)); }
+    .surface-title { margin:0; font-size:18px; font-weight:850; }
+    .surface-note { margin:4px 0 0; color:var(--muted); font-size:13px; }
+    .tabs { display:flex; gap:8px; flex-wrap:wrap; }
+    .tab { border:1px solid #d2d9e2; background:#f8fafc; color:#344054; padding:9px 12px; border-radius:8px; cursor:pointer; font-weight:800; }
+    .tab.active { background:var(--steel); color:#fff; border-color:var(--steel); }
+    .panel { display:none; padding:18px; min-height:406px; }
+    .panel.active { display:block; }
+    .upload-zone { min-height:236px; border:1.5px dashed #a9b6c4; border-radius:10px; background:linear-gradient(180deg,#fff,#f7fafb); display:grid; place-items:center; padding:18px; text-align:center; }
+    input[type="file"] { width:min(520px,100%); padding:13px; background:#fff; border:1px solid #d5dde6; border-radius:8px; }
+    #preview { display:none; width:220px; height:220px; object-fit:contain; margin:14px auto 0; border-radius:10px; border:1px solid #d8dde6; background:#fff; }
+    .draw-layout { display:grid; grid-template-columns:300px 1fr; gap:18px; align-items:start; }
+    #canvas { width:280px; height:280px; background:#fff; border-radius:10px; border:2px solid #bfc9d5; display:block; touch-action:none; box-shadow:inset 0 0 0 1px rgba(23,32,42,.03); }
+    .tips { margin:0; color:var(--muted); line-height:1.75; }
+    .actions { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+    button.primary,button.secondary { border:0; border-radius:8px; cursor:pointer; font-weight:850; padding:11px 15px; color:#fff; }
+    button.primary { background:linear-gradient(135deg,var(--coral),#c9412a); }
+    button.secondary { background:linear-gradient(135deg,var(--teal),#126d75); }
+    button.primary:disabled,button.secondary:disabled { opacity:.65; cursor:wait; }
+    .error { min-height:24px; margin-top:10px; color:#b42318; font-weight:700; }
+    .result-body { padding:18px; }
+    .result-stage { display:grid; grid-template-columns:140px 1fr; gap:16px; align-items:center; padding:16px; border:1px solid #e2e8f0; border-radius:10px; background:linear-gradient(145deg,#fff,#f7fbfb); }
+    .confidence-ring { width:132px; height:132px; border-radius:50%; background:conic-gradient(var(--teal) calc(var(--score,0) * 1%),#e8edf2 0); display:grid; place-items:center; position:relative; }
+    .confidence-ring::after { content:""; position:absolute; width:102px; height:102px; background:#fff; border-radius:50%; box-shadow:inset 0 0 0 1px #e7edf3; }
+    .metric { position:relative; z-index:1; font-size:54px; font-weight:900; line-height:1; }
+    .result-caption { margin:0 0 4px; color:var(--muted); font-weight:700; }
+    .confidence-text { margin:0; font-size:26px; font-weight:900; color:var(--steel); }
+    .mini-note { margin:8px 0 0; color:var(--muted); line-height:1.6; font-size:13px; }
+    table { width:100%; border-collapse:collapse; margin-top:14px; font-size:14px; }
+    th,td { padding:10px 8px; border-bottom:1px solid var(--line); text-align:left; }
+    th { color:#475467; font-weight:850; }
+    .bars { display:grid; gap:8px; margin-top:14px; }
+    .bar-row { display:grid; grid-template-columns:28px 1fr 58px; gap:10px; align-items:center; }
+    .bar-track { height:13px; background:#edf2f7; border-radius:999px; overflow:hidden; }
+    .bar-fill { height:100%; background:linear-gradient(90deg,var(--teal),var(--coral)); border-radius:999px; transition:width .25s ease; }
+    .section-label { margin:18px 0 0; font-size:15px; color:#24364b; font-weight:900; }
+    .history-wrap { max-height:230px; overflow:auto; }
+    @media (max-width:920px) { .topbar,.workspace,.draw-layout,.result-stage { grid-template-columns:1fr; } .status-strip { justify-content:flex-start; } #canvas { width:100%; max-width:280px; } h1 { font-size:30px; } }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <section class="hero">
-      <h1>手写数字识别系统</h1>
-      <p>基于 CNN 的在线识别页面，支持上传图片、网页手写板、Top-3 预测、概率分布和连续识别历史。</p>
-    </section>
-    <main class="grid">
-      <section class="card">
-        <div class="tabs">
-          <button class="tab active" data-target="upload-panel">上传图片识别</button>
-          <button class="tab" data-target="draw-panel">在线手写板识别</button>
-        </div>
-        <div id="upload-panel" class="panel active">
-          <input type="file" id="fileInput" accept="image/*" />
-          <img id="preview" alt="预览图片" />
-          <div class="actions">
-            <button class="primary" id="predictUploadBtn">识别上传图片</button>
-          </div>
-        </div>
-        <div id="draw-panel" class="panel">
-          <p class="muted">请在白底画板上用黑色笔迹手写数字 0-9。</p>
-          <canvas id="canvas" width="280" height="280"></canvas>
-          <div class="actions">
-            <button class="primary" id="predictCanvasBtn">识别当前手写内容</button>
-            <button class="secondary" id="clearCanvasBtn">清空画板</button>
-          </div>
-        </div>
+  <div class="shell">
+    <header class="topbar">
+      <div>
+        <div class="brand-kicker">112304260138 | Zhao Dan</div>
+        <h1>CNN Digit Recognition Console</h1>
+        <p class="subtitle">A PyTorch CNN web system for handwritten digit recognition. Upload an image or draw directly on the canvas, then inspect Top-3 predictions, probability distribution, and recognition history.</p>
+      </div>
+      <div class="status-strip"><span class="chip" id="serviceChip">Checking service</span><span class="chip">Kaggle Score 0.99639</span><span class="chip">Render Ready</span></div>
+    </header>
+    <main class="workspace">
+      <section class="surface">
+        <div class="surface-head"><div><h2 class="surface-title">Input Workspace</h2><p class="surface-note">Choose image upload or draw a digit online.</p></div><div class="tabs"><button class="tab active" data-target="upload-panel">Upload Image</button><button class="tab" data-target="draw-panel">Draw Digit</button></div></div>
+        <div id="upload-panel" class="panel active"><div class="upload-zone"><div><strong>Select a handwritten digit image</strong><p class="surface-note">White background / black stroke images work best. The system crops, centers, and normalizes automatically.</p><input type="file" id="fileInput" accept="image/*" /><img id="preview" alt="Preview" /></div></div><div class="actions"><button class="primary" id="predictUploadBtn">Predict Uploaded Image</button></div></div>
+        <div id="draw-panel" class="panel"><div class="draw-layout"><canvas id="canvas" width="280" height="280"></canvas><div><p class="tips">Write a single digit from 0 to 9 on the white canvas. The stroke is converted into a 28 x 28 model input before CNN inference.</p><div class="actions"><button class="primary" id="predictCanvasBtn">Predict Canvas Digit</button><button class="secondary" id="clearCanvasBtn">Clear Canvas</button></div></div></div></div>
         <div class="error" id="errorBox"></div>
       </section>
-      <aside class="card">
-        <div class="metric" id="predictionValue">-</div>
-        <div id="confidenceValue" class="muted">置信度: -</div>
-        <table id="top3Table">
-          <thead><tr><th>Rank</th><th>Digit</th><th>Probability</th></tr></thead>
-          <tbody></tbody>
-        </table>
-        <div class="bars" id="probabilityBars"></div>
-        <h3 class="history-title">连续识别历史</h3>
-        <table id="historyTable">
-          <thead><tr><th>Mode</th><th>Prediction</th><th>Confidence</th><th>Top-3</th></tr></thead>
-          <tbody></tbody>
-        </table>
+      <aside class="surface">
+        <div class="surface-head"><div><h2 class="surface-title">Recognition Result</h2><p class="surface-note">Prediction, Top-3 classes, and full probability distribution.</p></div></div>
+        <div class="result-body"><div class="result-stage"><div class="confidence-ring" id="confidenceRing" style="--score:0"><div class="metric" id="predictionValue">-</div></div><div><p class="result-caption">Current Prediction</p><p class="confidence-text" id="confidenceValue">Confidence: -</p><p class="mini-note">After inference, the chart below shows how strongly the model supports each digit class.</p></div></div><div class="section-label">Top-3 Predictions</div><table id="top3Table"><thead><tr><th>Rank</th><th>Digit</th><th>Probability</th></tr></thead><tbody></tbody></table><div class="section-label">Probability Distribution</div><div class="bars" id="probabilityBars"></div><div class="section-label">Recognition History</div><div class="history-wrap"><table id="historyTable"><thead><tr><th>Mode</th><th>Prediction</th><th>Confidence</th><th>Top-3</th></tr></thead><tbody></tbody></table></div></div>
       </aside>
     </main>
   </div>
   <script>
-    const tabs = document.querySelectorAll(".tab");
-    const panels = document.querySelectorAll(".panel");
-    const history = [];
-    const errorBox = document.getElementById("errorBox");
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    const preview = document.getElementById("preview");
-    const fileInput = document.getElementById("fileInput");
-
-    function resetCanvas() {
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.lineWidth = 18;
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-      ctx.strokeStyle = "#000000";
-    }
-    resetCanvas();
-
-    let drawing = false;
-    function pointFromEvent(event) {
-      const rect = canvas.getBoundingClientRect();
-      const touch = event.touches ? event.touches[0] : event;
-      return {
-        x: (touch.clientX - rect.left) * canvas.width / rect.width,
-        y: (touch.clientY - rect.top) * canvas.height / rect.height
-      };
-    }
-    function startDraw(event) {
-      drawing = true;
-      const p = pointFromEvent(event);
-      ctx.beginPath();
-      ctx.moveTo(p.x, p.y);
-      event.preventDefault();
-    }
-    function draw(event) {
-      if (!drawing) return;
-      const p = pointFromEvent(event);
-      ctx.lineTo(p.x, p.y);
-      ctx.stroke();
-      event.preventDefault();
-    }
-    function endDraw() { drawing = false; }
-    canvas.addEventListener("mousedown", startDraw);
-    canvas.addEventListener("mousemove", draw);
-    window.addEventListener("mouseup", endDraw);
-    canvas.addEventListener("touchstart", startDraw, {passive: false});
-    canvas.addEventListener("touchmove", draw, {passive: false});
-    window.addEventListener("touchend", endDraw);
-
-    tabs.forEach(tab => tab.addEventListener("click", () => {
-      tabs.forEach(x => x.classList.remove("active"));
-      panels.forEach(x => x.classList.remove("active"));
-      tab.classList.add("active");
-      document.getElementById(tab.dataset.target).classList.add("active");
-      errorBox.textContent = "";
-    }));
-
-    fileInput.addEventListener("change", () => {
-      const file = fileInput.files[0];
-      if (!file) {
-        preview.style.display = "none";
-        return;
-      }
-      preview.src = URL.createObjectURL(file);
-      preview.style.display = "block";
-    });
-
-    function renderHistory() {
-      const body = document.querySelector("#historyTable tbody");
-      body.innerHTML = "";
-      history.forEach(item => {
-        const row = document.createElement("tr");
-        row.innerHTML = `<td>${item.mode}</td><td>${item.prediction}</td><td>${item.confidence}</td><td>${item.top3}</td>`;
-        body.appendChild(row);
-      });
-    }
-
-    function renderResult(data, mode) {
-      errorBox.textContent = "";
-      document.getElementById("predictionValue").textContent = data.prediction;
-      document.getElementById("confidenceValue").textContent = `置信度: ${(data.confidence * 100).toFixed(2)}%`;
-
-      const top3Body = document.querySelector("#top3Table tbody");
-      top3Body.innerHTML = "";
-      data.top3.forEach((item, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `<td>Top ${index + 1}</td><td>${item.digit}</td><td>${(item.probability * 100).toFixed(2)}%</td>`;
-        top3Body.appendChild(row);
-      });
-
-      const bars = document.getElementById("probabilityBars");
-      bars.innerHTML = "";
-      data.probabilities.forEach(item => {
-        const row = document.createElement("div");
-        row.className = "bar-row";
-        row.innerHTML = `<div>${item.digit}</div><div class="bar-track"><div class="bar-fill" style="width:${(item.probability * 100).toFixed(2)}%"></div></div><div>${(item.probability * 100).toFixed(2)}%</div>`;
-        bars.appendChild(row);
-      });
-
-      history.unshift({
-        mode,
-        prediction: data.prediction,
-        confidence: `${(data.confidence * 100).toFixed(2)}%`,
-        top3: data.top3.map(x => `${x.digit}:${(x.probability * 100).toFixed(1)}%`).join(", ")
-      });
-      if (history.length > 10) history.pop();
-      renderHistory();
-    }
-
-    async function checkedJson(response) {
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.detail || "预测失败，请重试。");
-      return data;
-    }
-
-    async function predictUpload() {
-      const file = fileInput.files[0];
-      if (!file) {
-        errorBox.textContent = "请先上传图片。";
-        return;
-      }
-      const formData = new FormData();
-      formData.append("file", file);
-      try {
-        renderResult(await checkedJson(await fetch("/api/predict-upload", {method: "POST", body: formData})), "Upload");
-      } catch (err) {
-        errorBox.textContent = err.message;
-      }
-    }
-
-    async function predictCanvas() {
-      try {
-        const dataUrl = canvas.toDataURL("image/png");
-        renderResult(await checkedJson(await fetch("/api/predict-canvas", {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({data_url: dataUrl})
-        })), "Canvas");
-      } catch (err) {
-        errorBox.textContent = err.message;
-      }
-    }
-
-    document.getElementById("predictUploadBtn").addEventListener("click", predictUpload);
-    document.getElementById("predictCanvasBtn").addEventListener("click", predictCanvas);
-    document.getElementById("clearCanvasBtn").addEventListener("click", () => {
-      resetCanvas();
-      errorBox.textContent = "";
-    });
+    const tabs=document.querySelectorAll(".tab"),panels=document.querySelectorAll(".panel"),history=[]; const errorBox=document.getElementById("errorBox"),canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),preview=document.getElementById("preview"),fileInput=document.getElementById("fileInput"),uploadBtn=document.getElementById("predictUploadBtn"),canvasBtn=document.getElementById("predictCanvasBtn");
+    function resetCanvas(){ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.lineWidth=18;ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle="#000000";} resetCanvas();
+    let drawing=false; function pointFromEvent(event){const rect=canvas.getBoundingClientRect();const touch=event.touches?event.touches[0]:event;return{x:(touch.clientX-rect.left)*canvas.width/rect.width,y:(touch.clientY-rect.top)*canvas.height/rect.height};} function startDraw(event){drawing=true;const p=pointFromEvent(event);ctx.beginPath();ctx.moveTo(p.x,p.y);event.preventDefault();} function draw(event){if(!drawing)return;const p=pointFromEvent(event);ctx.lineTo(p.x,p.y);ctx.stroke();event.preventDefault();} function endDraw(){drawing=false;} canvas.addEventListener("mousedown",startDraw);canvas.addEventListener("mousemove",draw);window.addEventListener("mouseup",endDraw);canvas.addEventListener("touchstart",startDraw,{passive:false});canvas.addEventListener("touchmove",draw,{passive:false});window.addEventListener("touchend",endDraw);
+    tabs.forEach(tab=>tab.addEventListener("click",()=>{tabs.forEach(x=>x.classList.remove("active"));panels.forEach(x=>x.classList.remove("active"));tab.classList.add("active");document.getElementById(tab.dataset.target).classList.add("active");errorBox.textContent="";}));
+    fileInput.addEventListener("change",()=>{const file=fileInput.files[0];if(!file){preview.style.display="none";return;}preview.src=URL.createObjectURL(file);preview.style.display="block";});
+    async function refreshHealth(){try{const response=await fetch("/health");const data=await response.json();document.getElementById("serviceChip").textContent=`Model online | ${data.device}`;}catch{document.getElementById("serviceChip").textContent="Model status pending";}} refreshHealth();
+    function renderHistory(){const body=document.querySelector("#historyTable tbody");body.innerHTML="";history.forEach(item=>{const row=document.createElement("tr");row.innerHTML=`<td>${item.mode}</td><td>${item.prediction}</td><td>${item.confidence}</td><td>${item.top3}</td>`;body.appendChild(row);});}
+    function renderResult(data,mode){errorBox.textContent="";const confidence=data.confidence*100;document.getElementById("predictionValue").textContent=data.prediction;document.getElementById("confidenceValue").textContent=`Confidence: ${confidence.toFixed(2)}%`;document.getElementById("confidenceRing").style.setProperty("--score",confidence.toFixed(2));const top3Body=document.querySelector("#top3Table tbody");top3Body.innerHTML="";data.top3.forEach((item,index)=>{const row=document.createElement("tr");row.innerHTML=`<td>Top ${index+1}</td><td>${item.digit}</td><td>${(item.probability*100).toFixed(2)}%</td>`;top3Body.appendChild(row);});const bars=document.getElementById("probabilityBars");bars.innerHTML="";data.probabilities.forEach(item=>{const row=document.createElement("div");row.className="bar-row";row.innerHTML=`<div>${item.digit}</div><div class="bar-track"><div class="bar-fill" style="width:${(item.probability*100).toFixed(2)}%"></div></div><div>${(item.probability*100).toFixed(2)}%</div>`;bars.appendChild(row);});history.unshift({mode,prediction:data.prediction,confidence:`${confidence.toFixed(2)}%`,top3:data.top3.map(x=>`${x.digit}:${(x.probability*100).toFixed(1)}%`).join(", ")});if(history.length>10)history.pop();renderHistory();}
+    async function checkedJson(response){const data=await response.json();if(!response.ok)throw new Error(data.detail||"Prediction failed. Please try again.");return data;}
+    async function predictUpload(){const file=fileInput.files[0];if(!file){errorBox.textContent="Please upload an image first.";return;}const formData=new FormData();formData.append("file",file);uploadBtn.disabled=true;try{renderResult(await checkedJson(await fetch("/api/predict-upload",{method:"POST",body:formData})),"Upload");}catch(err){errorBox.textContent=err.message;}finally{uploadBtn.disabled=false;}}
+    async function predictCanvas(){canvasBtn.disabled=true;try{const dataUrl=canvas.toDataURL("image/png");renderResult(await checkedJson(await fetch("/api/predict-canvas",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({data_url:dataUrl})})),"Canvas");}catch(err){errorBox.textContent=err.message;}finally{canvasBtn.disabled=false;}}
+    uploadBtn.addEventListener("click",predictUpload);canvasBtn.addEventListener("click",predictCanvas);document.getElementById("clearCanvasBtn").addEventListener("click",()=>{resetCanvas();errorBox.textContent="";});
   </script>
 </body>
 </html>
