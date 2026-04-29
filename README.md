@@ -8,11 +8,11 @@
 
 ***
 
-## Project Links
+## 项目在线链接
 
-- **Render Online Deployment**: [https://zhaodan-mnist-cnn-digit.onrender.com](https://zhaodan-mnist-cnn-digit.onrender.com)
-- **GitHub README / Experiment Report**: [https://github.com/zhaodan24/112304260138zhaodan-2/blob/main/README.md](https://github.com/zhaodan24/112304260138zhaodan-2/blob/main/README.md)
-- **GitHub Repository**: [https://github.com/zhaodan24/112304260138zhaodan-2](https://github.com/zhaodan24/112304260138zhaodan-2)
+- **Render 在线部署网址**：[https://zhaodan-mnist-cnn-digit.onrender.com](https://zhaodan-mnist-cnn-digit.onrender.com)
+- **GitHub README / 实验报告**：[https://github.com/zhaodan24/112304260138zhaodan-2/blob/main/README.md](https://github.com/zhaodan24/112304260138zhaodan-2/blob/main/README.md)
+- **GitHub 仓库地址**：[https://github.com/zhaodan24/112304260138zhaodan-2](https://github.com/zhaodan24/112304260138zhaodan-2)
 
 ***
 
@@ -220,44 +220,46 @@ digit_cnn_render_app/
 - `/api/predict-upload`：识别上传图片
 - `/api/predict-canvas`：识别网页手写板内容
 
-页面功能与老师示例一致，包括上传图片、在线手写板、Top-3 预测、概率分布条形图和连续识别历史。
+页面在功能上覆盖老师示例，并在界面展示上增加了模型状态标签、置信度圆环、Top-3 表格、0-9 概率分布条形图和连续识别历史。
 
 ### 2.4 部署平台
 
-选择 Render 作为公网部署平台。项目已经包含 `Procfile` 和 `render.yaml`，部署时连接 GitHub 仓库后即可按以下命令启动：
+本项目选择 Render 作为公网部署平台，并已经完成 GitHub 仓库连接和 Web Service 部署。仓库内包含 `Procfile` 与 `render.yaml`，Render 构建完成后使用下面命令启动 FastAPI 服务：
 
 ```bash
 uvicorn main:app --host 0.0.0.0 --port $PORT
 ```
 
-后续自动上传和部署需要以下信息：
+最终部署结果如下：
 
-| 平台 | 需要的信息 |
+| 平台 | 部署结果 |
 | --- | --- |
-| GitHub | GitHub 用户名、仓库名、是否公开、GitHub Token 或已登录的 `gh` CLI |
-| Render | Render 账号，需要连接 GitHub 仓库并创建 Web Service |
+| GitHub | 代码、模型权重、提交文件和 README 实验报告已上传到仓库 [https://github.com/zhaodan24/112304260138zhaodan-2](https://github.com/zhaodan24/112304260138zhaodan-2) |
+| Render | 已创建并部署 Web Service：`zhaodan-mnist-cnn-digit` |
+| 在线系统 | [https://zhaodan-mnist-cnn-digit.onrender.com](https://zhaodan-mnist-cnn-digit.onrender.com) |
+| 健康检查 | [https://zhaodan-mnist-cnn-digit.onrender.com/health](https://zhaodan-mnist-cnn-digit.onrender.com/health)，返回 `status: ok` |
 
 ### 2.5 提交信息
 
 | 提交项 | 内容 |
 | --- | --- |
-| GitHub Repository | [https://github.com/zhaodan24/112304260138zhaodan-2](https://github.com/zhaodan24/112304260138zhaodan-2) |
-| GitHub README / Experiment Report | [https://github.com/zhaodan24/112304260138zhaodan-2/blob/main/README.md](https://github.com/zhaodan24/112304260138zhaodan-2/blob/main/README.md) |
-| Render Online Deployment | [https://zhaodan-mnist-cnn-digit.onrender.com](https://zhaodan-mnist-cnn-digit.onrender.com) |
-| Render Health Check | [https://zhaodan-mnist-cnn-digit.onrender.com/health](https://zhaodan-mnist-cnn-digit.onrender.com/health) |
+| GitHub 仓库地址 | [https://github.com/zhaodan24/112304260138zhaodan-2](https://github.com/zhaodan24/112304260138zhaodan-2) |
+| GitHub README / 实验报告 | [https://github.com/zhaodan24/112304260138zhaodan-2/blob/main/README.md](https://github.com/zhaodan24/112304260138zhaodan-2/blob/main/README.md) |
+| Render 在线访问链接 | [https://zhaodan-mnist-cnn-digit.onrender.com](https://zhaodan-mnist-cnn-digit.onrender.com) |
+| Render 健康检查接口 | [https://zhaodan-mnist-cnn-digit.onrender.com/health](https://zhaodan-mnist-cnn-digit.onrender.com/health) |
 
-The Render web app has been deployed and verified online. It supports image upload recognition, browser canvas handwriting recognition, predicted digit, confidence, Top-3 results, probability bars, and recognition history.
+Render 版 Web 应用已经完成线上部署并验证通过，支持上传图片识别和网页手写板识别；页面可以显示预测数字、置信度、Top-3 结果、0-9 概率分布和连续识别历史。
 
 ### 2.6 提交清单
 
 - [x] Render 版 Web 项目代码：`digit_cnn_render_app`
 - [x] 上传图片识别功能
-- [x] 本地访问测试：`http://127.0.0.1:8000`
+- [x] 网页手写板识别功能
 - [x] Top-3 预测结果与概率分布
 - [x] 连续识别历史
-- [x] GitHub Repository: https://github.com/zhaodan24/112304260138zhaodan-2
-- [x] Render Online Deployment: https://zhaodan-mnist-cnn-digit.onrender.com
-- [x] Online page and prediction API verified
+- [x] GitHub 仓库地址：https://github.com/zhaodan24/112304260138zhaodan-2
+- [x] Render 公网在线访问链接：https://zhaodan-mnist-cnn-digit.onrender.com
+- [x] 线上页面和预测接口验证通过
 
 ***
 
@@ -285,7 +287,7 @@ The Render web app has been deployed and verified online. It supports image uplo
 
 | 提交项 | 内容 |
 | --- | --- |
-| Online URL | [https://zhaodan-mnist-cnn-digit.onrender.com](https://zhaodan-mnist-cnn-digit.onrender.com) |
+| 在线访问链接 | [https://zhaodan-mnist-cnn-digit.onrender.com](https://zhaodan-mnist-cnn-digit.onrender.com) |
 | 实现了哪些加分项 | 已实现手写输入、Top-3 预测、概率分布显示、连续识别历史 |
 
 ### 3.5 提交清单
@@ -294,8 +296,8 @@ The Render web app has been deployed and verified online. It supports image uplo
 - [x] Top-3 预测结果
 - [x] 概率分布显示
 - [x] 连续识别历史
-- [x] Render Online System: https://zhaodan-mnist-cnn-digit.onrender.com
-- [x] Online handwriting recognition system verified
+- [x] Render 公网在线系统链接：https://zhaodan-mnist-cnn-digit.onrender.com
+- [x] 线上手写识别系统已完成部署，可在网页中实时测试
 
 ***
 
@@ -303,4 +305,5 @@ The Render web app has been deployed and verified online. It supports image uplo
 
 本次实验完成了基于 CNN 的手写数字识别模型训练、超参数调优、Kaggle 提交、Web 应用封装和交互式手写识别系统搭建。实验一中，通过 4 组超参数对比可以看出，数据增强和 Early Stopping 对提升泛化能力有明显帮助；最终 CNN 模型结合 AdamW、OneCycleLR、BatchNorm、Dropout、模型集成和 TTA，在 Kaggle 上获得 **0.99639** 的成绩。
 
-实验二和实验三已根据老师提供的 Render 示例完成同款效果页面。系统支持上传图片识别和网页手写板识别，能够显示预测数字、置信度、Top-3 结果、0-9 概率分布条形图和连续识别历史。当前本地测试地址为 `http://127.0.0.1:8000`，项目目录为 `digit_cnn_render_app`，后续只需上传 GitHub 并连接 Render，即可生成公网访问链接并补充到报告中。
+实验二和实验三已经完成公网部署，不再停留在本地测试阶段。线上系统地址为 [https://zhaodan-mnist-cnn-digit.onrender.com](https://zhaodan-mnist-cnn-digit.onrender.com)，GitHub 仓库地址为 [https://github.com/zhaodan24/112304260138zhaodan-2](https://github.com/zhaodan24/112304260138zhaodan-2)，README 文件即本次实验报告。系统支持上传图片识别和网页手写板识别，能够显示预测数字、置信度、Top-3 结果、0-9 概率分布条形图和连续识别历史，满足 Web 展示与交互式识别的实验要求。
+
